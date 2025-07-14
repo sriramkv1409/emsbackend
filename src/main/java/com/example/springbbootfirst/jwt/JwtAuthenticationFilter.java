@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String token;
         final String username;
 
-        // ✅ Skip if Authorization header is missing or doesn't start with Bearer
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         token = authHeader.substring(7);
         username = jwtTokenProvider.getUserNameFromToken(token);
 
-        // ✅ Proceed only if username is extracted and user not already authenticated
+      
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
