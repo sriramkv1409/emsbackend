@@ -1,5 +1,6 @@
 package com.example.springbbootfirst.Controllers;
 
+import com.example.springbbootfirst.Models.JwtResponse;
 import com.example.springbbootfirst.Models.LoginRequest;
 import com.example.springbbootfirst.Models.RegisterDetails;
 import com.example.springbbootfirst.Models.UserDetailsDto;
@@ -23,7 +24,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String Login(@RequestBody LoginRequest login) {
+    public JwtResponse Login(@RequestBody LoginRequest login) {
         return authService.authenticate(login);
     }
 

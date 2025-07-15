@@ -1,6 +1,7 @@
 package com.example.springbbootfirst.Services;
 
 import com.example.springbbootfirst.Models.RegisterDetails;
+import com.example.springbbootfirst.Models.UserDetailsImpl;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,10 +35,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(()->new RuntimeException("User Not Found"));
 
         //Step 2
-        Set<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(roles -> new SimpleGrantedAuthority(roles.getRoleName()))
-                .collect(Collectors.toSet());
-        System.out.println("Username is " + user.getUserName() + "\nPassword is " + user.getPassword() + "\nAuthority is " + authorities);
-        return new User(user.getUserName(), user.getPassword() ,authorities);
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+                .collect(Collectors.toList());
+
+        return new UserDetailsImpl(user, authorities);
     }
 }

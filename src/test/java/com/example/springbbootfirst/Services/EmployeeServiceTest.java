@@ -35,7 +35,7 @@ class EmployeeServiceTest {
         List<RegisterDetails> result = employeeService.getAllEmployees();
         assertEquals(2,result.size());
     }
-    
+
 
 }
 
