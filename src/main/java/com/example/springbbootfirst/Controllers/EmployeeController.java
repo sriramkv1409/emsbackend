@@ -1,7 +1,9 @@
 package com.example.springbbootfirst.Controllers;
 
 import com.example.springbbootfirst.Models.*;
+import com.example.springbbootfirst.Services.AuthService;
 import com.example.springbbootfirst.Services.EmployeeService;
+import jakarta.persistence.PostRemove;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ public class EmployeeController {
     //Service layer
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private AuthService authService;
 
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
@@ -44,6 +49,13 @@ public class EmployeeController {
         return employeeService.getEmployeeByRole(roleName);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/employee/add")
+    public String addEmployee(@RequestBody UserDetailsDto details){
+        authService.addNewEmployee(details);
+        return "Employee added Successfully";
+    }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/employee/{empId}")
@@ -63,6 +75,5 @@ public class EmployeeController {
     public String updateRecord(@PathVariable int empId,@RequestBody UserDetailsDto updateDetails){
         return employeeService.updateRecord(empId,updateDetails);
     }
-
 
 }

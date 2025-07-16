@@ -33,7 +33,7 @@ public class RegisterDetails {
     @Column(name = "user_name",nullable = false,unique = true)
     private String userName;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "empId"),
     inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "roleId"))
     private Set<Roles> roles;

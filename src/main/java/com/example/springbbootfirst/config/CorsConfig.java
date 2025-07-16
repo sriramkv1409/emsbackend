@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
-                .allowedOrigins("https://emsbackend-zur3.onrender.com")
+                .allowedOrigins("http://localhost:5173","https://emsbackend-zur3.onrender.com")
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);

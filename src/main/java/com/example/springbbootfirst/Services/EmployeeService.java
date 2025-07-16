@@ -4,6 +4,7 @@ import com.example.springbbootfirst.Models.*;
 import com.example.springbbootfirst.Repository.RegisterDetailsRepository;
 import com.example.springbbootfirst.Repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public class EmployeeService {
 
     @Autowired
     private RolesRepository rolesRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<RegisterDetails> getAllEmployees() {
         return details.findAll();
@@ -62,11 +66,15 @@ public class EmployeeService {
 
         updated.setName(dto.getName());
         updated.setEmail(dto.getEmail());
-        updated.setPassword(dto.getPassword());
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            updated.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
+
         updated.setUserName(dto.getUserName());
 
         details.save(updated);
         return "Employee Updated Successfuly";
+
     }
 
 }
