@@ -58,7 +58,6 @@ class EmployeeControllerTest {
         assertNotNull(result);
         assertEquals(mockEmployee.getEmpId(),result.getEmpId());
         assertEquals(mockEmployee.getUserName(),result.getUserName());
-
     }
 
     

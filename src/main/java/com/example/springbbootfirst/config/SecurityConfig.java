@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .cors(cors -> cors  // ✅ Enable CORS
                         .configurationSource(request -> {
                             var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-                            corsConfig.setAllowedOrigins(List.of("http://localhost:5173")); // Frontend origin
+                            corsConfig.setAllowedOrigins(List.of("http://localhost:5173","https://emsbackend-zur3.onrender.com")); // Frontend origin
                             corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                             corsConfig.setAllowedHeaders(List.of("*"));
                             corsConfig.setAllowCredentials(true);
