@@ -1,6 +1,8 @@
 package com.example.springbbootfirst.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class RegisterDetails {
 
     @Id
@@ -37,6 +40,11 @@ public class RegisterDetails {
     @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "empId"),
     inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "roleId"))
     private Set<Roles> roles;
+
+    @OneToMany(mappedBy = "employee")
+    @JsonManagedReference
+    private List<Task> tasks;
+
 
 }
 
