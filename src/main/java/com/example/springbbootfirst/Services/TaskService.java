@@ -19,8 +19,7 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     @Autowired
-    private RegisterDetailsRepository employeeRepository; // Inject your existing EmployeeRepository
-
+    private RegisterDetailsRepository employeeRepository;
     public Task assignTask(TaskDTO taskDTO) {
         // 1. Find the employee to assign the task to
         RegisterDetails employee = employeeRepository.findById(taskDTO.getEmpId())
@@ -29,9 +28,9 @@ public class TaskService {
         // 2. Create a new Task entity
         Task newTask = new Task();
         newTask.setDescription(taskDTO.getDescription());
-        newTask.setDueDate(LocalDate.parse(taskDTO.getDueDate())); // Convert String date to LocalDate
-        newTask.setStatus("PENDING"); // Set a default status
-        newTask.setEmployee(employee); // Link the task to the employee
+        newTask.setDueDate(LocalDate.parse(taskDTO.getDueDate()));
+        newTask.setStatus("PENDING");
+        newTask.setEmployee(employee);
 
         // 3. Save the new task to the database
         return taskRepository.save(newTask);
