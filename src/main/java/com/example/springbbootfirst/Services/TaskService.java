@@ -43,4 +43,8 @@ public class TaskService {
     public List<Task> getTaskByEmployeeId(int empId) {
         return taskRepository.findByEmployeeEmpId(empId);
     }
+
+    public List<Task> getTaskByName(String userName) {
+        return taskRepository.findByEmployeeUserName(userName);
+    }
 }

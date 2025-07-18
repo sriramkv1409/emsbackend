@@ -34,4 +34,9 @@ public class TaskController {
     public List<Task> getTaskByEmployeeId(@PathVariable int empId){
         return taskService.getTaskByEmployeeId(empId);
     }
+
+    @GetMapping("/username/{userName}")
+    public List<Task> getTaskByName(@PathVariable String userName){
+        return taskService.getTaskByName(userName);
+    }
 }

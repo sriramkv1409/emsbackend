@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/tasks/assign").permitAll()
+                        .requestMatchers("/api/tasks/username/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE,"/employee/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
