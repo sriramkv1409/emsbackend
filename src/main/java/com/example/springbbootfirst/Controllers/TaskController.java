@@ -39,4 +39,16 @@ public class TaskController {
     public List<Task> getTaskByName(@PathVariable String userName){
         return taskService.getTaskByName(userName);
     }
+
+    @PutMapping("/status/{taskId}")
+    public ResponseEntity<Task> updateStatus(@PathVariable Long taskId, @RequestBody String status) {
+        Task updatedTask = taskService. updateTaskStatus(taskId, status);
+        return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{taskId}")
+    public String deleteTaskById(@PathVariable Long taskId){
+        return taskService.deleteTaskById(taskId);
+    }
+
 }

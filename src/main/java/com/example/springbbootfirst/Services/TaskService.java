@@ -47,4 +47,16 @@ public class TaskService {
     public List<Task> getTaskByName(String userName) {
         return taskRepository.findByEmployeeUserName(userName);
     }
+
+    public Task updateTaskStatus(Long taskId, String status) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+        task.setStatus(status);
+        return taskRepository.save(task);
+    }
+
+    public String deleteTaskById(Long taskId) {
+         taskRepository.deleteById(taskId);
+         return "Task deleted Succesfully";
+    }
 }
